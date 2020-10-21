@@ -6,7 +6,7 @@
     <title>Meme Generator</title>
     <link rel="stylesheet" href="css/main.css" />
   </head>
-  <body>
+  <body onload="onInit()">
     <header>
       <h2 class="logo">Roman<span>K</span></h2>
       <nav>
@@ -15,8 +15,36 @@
       </nav>
     </header>
 
-    <main class="gallery grid">
-        
+    <main class="gallery">
+      <div class="gallery-images grid">
+        <!-- <img onclick="inImgClk(this, id)" src="/img/1.jpg" alt="" /> -->
+      </div>
+    </main>
+
+    <main class="meme-editor flex">
+      <canvas id="my-canvas"></canvas>
+
+      <div class="edit flex">
+        <input type="text" />
+        <div>
+            <button>&#8593</button>
+            <button>&#8595</button>
+            <button>&#43</button>
+            <button>&#128465</button>
+        </div>
+        <div class="text-editor">
+            <button>A+</button>
+            <button>A-</button>
+            <button>Left</button>
+            <button>Center</button>
+            <button>Right</button>
+            <select name="text" id="text-select">
+               <option value="impact">IMPACT</option>
+            </select>
+            <button>S</button>
+            <input type="color">
+        </div>
+      </div>
     </main>
 
     <script src="/js/meme-service.js"></script>
