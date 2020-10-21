@@ -3,6 +3,7 @@
 }
 .gallery {
   border: black solid 2px;
+  margin: 20px;
 }
 img {
   width: 100%;
