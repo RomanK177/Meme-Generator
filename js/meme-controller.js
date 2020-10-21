@@ -14,8 +14,9 @@ function renderImgs() {
   let images = getImgs();
   // console.log(images)
   var strHtmls = images.map(function (img) {
+    console.log(img.url);
     return `
-    <img onclick="onImgClk(this, ${img.id})"  src=${img.url} alt="" />
+    <img onclick="onImgClk(this, ${img.id})"  src="${img.url}" alt="" />
         `;
   });
 
@@ -30,4 +31,6 @@ function drawImgFromlocal(id) {
 }
 function onImgClk(ev, imgId) {
   drawImgFromlocal(imgId);
+  document.querySelector(".meme-editor").classList.toggle("hidden");
+  //   document.querySelector(".gallery").classList.toggle("hidden");
 }

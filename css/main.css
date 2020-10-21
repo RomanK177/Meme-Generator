@@ -20,6 +20,10 @@ canvas {
   justify-content: flex-start;
   align-items: center;
 }
+.hidden {
+  transform: translate(105%);
+}
+
 /* Layout------- */
 .grid {
   display: grid;
