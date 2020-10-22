@@ -5,14 +5,15 @@ var gKeywords = { happy: 0, animal: 0 };
 var gImgs = [];
 var gMeme = {
   selectedImgId: undefined,
-  selectedLineIdx: undefined,
+  selectedLineIdx: 0,
 
   lines: [
     {
-      text: undefined,
-      size: 20,
+      text: "",
+      size: 40,
       align: "center",
-      color: "red",
+      color: "black",
+      yMod: 0,
     },
   ],
 };
@@ -52,4 +53,39 @@ function getImgById(imgId = 1) {
     return imgId === img.id;
   });
   return img;
+}
+function selectImg(imgId) {
+  gMeme.selectedImgId = imgId;
+}
+function updateTxt(txt) {
+  gMeme.lines[gMeme.selectedLineIdx].text = txt;
+}
+function getSelectedImgId() {
+  return gMeme.selectedImgId;
+}
+function addLine() {
+  gMeme.lines.push({
+    text: "",
+    size: 40,
+    align: "center",
+    color: "black",
+    yMod: 0,
+  });
+  gMeme.selectedLineIdx++;
+}
+function nextLine() {
+  gMeme.selectedLineIdx++;
+  if (gMeme.selectedLineIdx > gMeme.lines.length - 1) gMeme.selectedLineIdx = 0;
+}
+function lineUp() {
+  gMeme.lines[gMeme.selectedLineIdx].yMod -= 5;
+}
+function lineDown() {
+  gMeme.lines[gMeme.selectedLineIdx].yMod += 5;
+}
+function delLine() {
+  gMeme.lines.splice(gMeme.selectedLineIdx, 1);
+  gMeme.selectedLineIdx--;
+  if (gMeme.selectedLineIdx < 0) gMeme.selectedLineIdx = 0;
+  // if(gMeme.lines)
 }

@@ -22,18 +22,19 @@
     </main>
 
     <main class="meme-editor flex hidden">
-      <canvas id="my-canvas"></canvas>
+      <canvas id="my-canvas" width="400" height="400"></canvas>
 
       <div class="edit flex">
-        <input type="text" />
-        <div>
-            <button>&#8593</button>
-            <button>&#8595</button>
-            <button>&#43</button>
-            <button>&#128465</button>
+        <input class="txt-input" onchange="onTxtInput(value)" oninput="onTxtInput(value)" type="text" />
+        <div class="line-control">
+            <button onclick="onLineUp()">&#8593</button>
+            <button onclick="onLineDown()">&#8595</button>
+            <button onclick="onNextLine()">&#8593 &#8595</button>
+            <button onclick="onAddLine()">&#43</button>
+            <button onclick="onDelLine()">&#128465</button>
         </div>
         <div class="text-editor">
-            <button>A+</button>
+            <button onclick="onIncreaseTxt()">A+</button>
             <button>A-</button>
             <button>Left</button>
             <button>Center</button>
