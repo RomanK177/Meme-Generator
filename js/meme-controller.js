@@ -1,7 +1,6 @@
 "use strict";
 var gCanvas;
 var gCtx;
-var gTxtSize = 150;
 
 function onInit() {
   gCanvas = document.querySelector("#my-canvas");
@@ -158,9 +157,7 @@ function canvasClicked(ev) {
   // console.log(offsetX, offsetY);
 
   const clickedLine = gMeme.lines.find((line) => {
-    return (
-      offsetY > line.y - line.size - line.yMod && offsetY < line.y - line.yMod
-    );
+    return offsetY > line.y - line.size && offsetY < line.y;
   });
   // console.log(clickedLine);
 
@@ -171,13 +168,18 @@ function canvasClicked(ev) {
     document.querySelector(".fill-color").value =
       gMeme.lines[gMeme.selectedLineIdx].fillColor;
     // openModal(clientX, clientY);
+    // openModal();
   }
 }
-function openModal(x, y) {
-  const elModal = document.querySelector(".modal");
-  elModal.style.display = "block";
-  // elModal.innerText = `${starName}: ${starRate}`;
-
-  elModal.style.top = y + "px";
-  elModal.style.left = x + "px";
-}
+// function openModal() {
+//   const elModal = document.querySelector(".modal");
+//   elModal.style.display = "block";
+//   let width = gCanvas.width;
+//   let height = gMeme.lines[gMeme.selectedLineIdx].size;
+//   elModal.style.width = width + "px";
+//   elModal.style.height = height - 20 + "px";
+//   let x = gMeme.lines[gMeme.selectedLineIdx].x;
+//   let y = gMeme.lines[gMeme.selectedLineIdx].y;
+//   elModal.style.top = y + 35 + "px";
+//   elModal.style.left = x - 155 + "px";
+// }

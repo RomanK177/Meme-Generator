@@ -50,8 +50,6 @@ button:hover {
 button img {
   width: 30px;
   height: 30px;
-  /* border-radius: 2px;
-  border: solid; */
 }
 canvas {
   border: black solid 1px;
@@ -239,9 +237,10 @@ footer p {
 .modal {
   width: 300px;
   background-color: rgba(255, 255, 255, 0);
-  border: 1px solid burlywood;
+  border: 3px solid rgb(165, 253, 0);
   border-radius: 20px;
   padding: 12px 8px;
   display: none;
   position: absolute;
+  box-shadow: 5px 6px 10px 11px #f0ff00;
 }
