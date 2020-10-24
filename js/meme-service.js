@@ -12,7 +12,8 @@ var gMeme = {
       text: "",
       size: 40,
       align: "center",
-      color: "black",
+      strokeColor: "#000000",
+      fillColor: "#FFFFFF",
       yMod: 0,
     },
   ],
@@ -68,10 +69,11 @@ function addLine() {
     text: "",
     size: 40,
     align: "center",
-    color: "black",
+    strokeColor: "#000000",
+    fillColor: "#FFFFFF",
     yMod: 0,
   });
-  gMeme.selectedLineIdx++;
+  gMeme.selectedLineIdx = gMeme.lines.length - 1;
 }
 function nextLine() {
   gMeme.selectedLineIdx++;
@@ -87,5 +89,32 @@ function delLine() {
   gMeme.lines.splice(gMeme.selectedLineIdx, 1);
   gMeme.selectedLineIdx--;
   if (gMeme.selectedLineIdx < 0) gMeme.selectedLineIdx = 0;
-  // if(gMeme.lines)
+  if (gMeme.lines.length <= 0) addLine();
+}
+function increaseTxt() {
+  gMeme.lines[gMeme.selectedLineIdx].size += 5;
+}
+function decreaseTxt() {
+  gMeme.lines[gMeme.selectedLineIdx].size -= 5;
+}
+function alignLeft() {
+  gMeme.lines[gMeme.selectedLineIdx].align = "left";
+}
+function alignCenter() {
+  gMeme.lines[gMeme.selectedLineIdx].align = "center";
+}
+function alignRight() {
+  gMeme.lines[gMeme.selectedLineIdx].align = "right";
+}
+function changeFont(font) {
+  gMeme.lines[gMeme.selectedLineIdx].font = font;
+}
+function fillChange(color) {
+  gMeme.lines[gMeme.selectedLineIdx].fillColor = color;
+}
+function strokeChange(color) {
+  gMeme.lines[gMeme.selectedLineIdx].strokeColor = color;
+}
+function updateSelectedLineInx(line) {
+  gMeme.selectedLineIdx = gMeme.lines.indexOf(line);
 }

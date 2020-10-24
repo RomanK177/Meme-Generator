@@ -7,46 +7,55 @@
     <link rel="stylesheet" href="css/main.css" />
   </head>
   <body onload="onInit()">
-    <header>
+    <header class="flex align-center space-between  container">
       <h2 class="logo">Roman<span>K</span></h2>
       <nav>
-        <button class="galleryBtn">Gallery</button>
-        <button class="memeBtn">Memes</button>
+        <button onclick="onGalleryClk()" class="galleryBtn">Gallery</button>
+        <!-- <button class="memeBtn">Memes</button> -->
       </nav>
     </header>
 
-    <main class="gallery">
-      <div class="gallery-images grid">
+    <main class="gallery container">
+      <div class="gallery-images grid container">
         <!-- <img onclick="inImgClk(this, id)" src="/img/1.jpg" alt="" /> -->
       </div>
     </main>
 
-    <main class="meme-editor flex hidden">
-      <canvas id="my-canvas" width="400" height="400"></canvas>
-
-      <div class="edit flex">
+    <main class="meme-editor flex hidden container">
+      <canvas onclick="canvasClicked(event)" id="my-canvas" width="350" height="350"></canvas>
+       <div class="modal"></div>
+      <div class="edit ">
         <input class="txt-input" onchange="onTxtInput(value)" oninput="onTxtInput(value)" type="text" />
-        <div class="line-control">
-            <button onclick="onLineUp()">&#8593</button>
-            <button onclick="onLineDown()">&#8595</button>
-            <button onclick="onNextLine()">&#8593 &#8595</button>
-            <button onclick="onAddLine()">&#43</button>
-            <button onclick="onDelLine()">&#128465</button>
-        </div>
-        <div class="text-editor">
-            <button onclick="onIncreaseTxt()">A+</button>
-            <button>A-</button>
-            <button>Left</button>
-            <button>Center</button>
-            <button>Right</button>
-            <select name="text" id="text-select">
+        <!-- <div class="line-control"> -->
+            <button class="line-up" onclick="onLineUp()">&#8593</button>
+            <button class="line-down" onclick="onLineDown()">&#8595</button>
+            <button class="next-line" onclick="onNextLine()"><img src="ICONS/up-and-down-opposite-double-arrows-side-by-side.png" alt=""></button>
+            <button class="add-line" onclick="onAddLine()"><img src="ICONS/add.png" alt=""></button>
+            <button class="del-line" onclick="onDelLine()"><img src="ICONS/trash.png" alt=""></button>
+        <!-- </div> -->
+        <!-- <div class="text-editor"> -->
+            <button class="increase-txt" onclick="onIncreaseTxt()"><img src="ICONS/increase font - icon.png" alt=""></button>
+            <button class="decrease-txt" onclick="onDecreaseTxt()"><img src="ICONS/decrease font - icon.png" alt=""></button>
+            <button class="align-left" onclick="onAlignLeft()"><img src="ICONS/align-to-left.png" alt=""></button>
+            <button class="align-center" onclick="onAlignCenter()"><img src="ICONS/center-text-alignment.png" alt=""></button>
+            <button class="align-right" onclick="onAlignRight()"><img src="ICONS/align-to-right.png" alt=""></button>
+            <select onchange="onFontChange(value)" name="text" id="text-select">
                <option value="impact">IMPACT</option>
+               <option value="Ariel">ARIEL</option>
+               <option value="Georgia">GEORGIA</option>
             </select>
-            <button>S</button>
-            <input type="color">
-        </div>
+            <input onchange="onStokeChange(value)" class="stroke-color" type="color">
+            <input onchange="onFillChange(value)" class="fill-color" type="color">
+        <!-- </div> -->
+        <!-- <button onclick="downloadCanvas(this)" download="">Download</button> -->
+        <a class="download" href="#" onclick="downloadCanvas(this)" download="">Download</a>
       </div>
     </main>
+
+    <footer class="flex justify-center align-center container">
+      <h2 class="logo">Roman<span>K</span></h2>
+      <p>all rights reserved 2019</p>
+    </footer>
 
     <script src="js/meme-service.js"></script>
     <script src="js/meme-controller.js"></script>

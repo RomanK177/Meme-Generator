@@ -8,7 +8,7 @@ function onInit() {
   gCtx = gCanvas.getContext("2d");
   addImages();
   renderImgs();
-  // drawImgFromlocal();
+  document.querySelector(".fill-color").value = "#FFFFFF";
 }
 
 function renderImgs() {
@@ -33,28 +33,38 @@ function drawImgFromlocal(id) {
 function onImgClk(ev, imgId) {
   selectImg(imgId);
   drawImgFromlocal(imgId, gMeme.lines[gMeme.selectedLineIdx].text);
-  document.querySelector(".meme-editor").classList.toggle("hidden");
-  //   document.querySelector(".gallery").classList.toggle("hidden");
+  document.querySelector(".meme-editor").classList.remove("hidden");
+  document.querySelector(".gallery").classList.add("hidden");
 }
+function onGalleryClk() {
+  document.querySelector(".meme-editor").classList.add("hidden");
+  document.querySelector(".gallery").classList.remove("hidden");
+}
+
 function onTxtInput(txt) {
   clearCanvas();
   updateTxt(txt);
   drawImgFromlocal(getSelectedImgId());
 }
+
 function drawText() {
   let font = document.getElementById("text-select").value;
 
   gMeme.lines.forEach((line, idx) => {
     if (line.align === "center") {
       line.x = gCanvas.width / 2;
-      line.y = idx * (line.size + 40) + line.size + line.yMod;
-    } else {
-      line.x = idx * (line.size + 40) + 20;
-      line.y = idx * (line.size + 40) + 20;
-    }
+    } else if (line.align === "right") {
+      line.x = gCanvas.width - 20;
+    } else line.x = 20;
 
-    gCtx.strokeStyle = gMeme.lines[gMeme.selectedLineIdx].color;
-    gCtx.fillStyle = "white";
+    if (idx === 0) {
+      line.y = line.size + line.yMod;
+    } else if (idx === 1) {
+      line.y = gCanvas.height - 10 + line.yMod;
+    } else line.y = gCanvas.height / 2 + line.yMod;
+
+    gCtx.strokeStyle = line.strokeColor;
+    gCtx.fillStyle = line.fillColor;
     gCtx.lineWidth = "1";
     gCtx.font = `${line.size}px ${font}`;
     gCtx.textAlign = line.align;
@@ -70,11 +80,14 @@ function clearCanvas() {
 function onAddLine() {
   addLine();
   document.querySelector(".txt-input").value = "";
+  document.querySelector(".fill-color").value = "#FFFFFF";
 }
 function onNextLine() {
   nextLine();
   document.querySelector(".txt-input").value =
     gMeme.lines[gMeme.selectedLineIdx].text;
+  document.querySelector(".fill-color").value =
+    gMeme.lines[gMeme.selectedLineIdx].fillColor;
 }
 function onLineUp() {
   clearCanvas();
@@ -92,4 +105,79 @@ function onDelLine() {
   drawImgFromlocal(getSelectedImgId());
   document.querySelector(".txt-input").value =
     gMeme.lines[gMeme.selectedLineIdx].text;
+}
+function onIncreaseTxt() {
+  clearCanvas();
+  increaseTxt();
+  drawImgFromlocal(getSelectedImgId());
+}
+function onDecreaseTxt() {
+  clearCanvas();
+  decreaseTxt();
+  drawImgFromlocal(getSelectedImgId());
+}
+function onAlignLeft() {
+  clearCanvas();
+  alignLeft();
+  drawImgFromlocal(getSelectedImgId());
+}
+function onAlignCenter() {
+  clearCanvas();
+  alignCenter();
+  drawImgFromlocal(getSelectedImgId());
+}
+function onAlignRight() {
+  clearCanvas();
+  alignRight();
+  drawImgFromlocal(getSelectedImgId());
+}
+function onFontChange(font) {
+  clearCanvas();
+  changeFont(font);
+  drawImgFromlocal(getSelectedImgId());
+}
+function onFillChange(color) {
+  clearCanvas();
+  fillChange(color);
+  drawImgFromlocal(getSelectedImgId());
+}
+function onStokeChange(color) {
+  clearCanvas();
+  strokeChange(color);
+  drawImgFromlocal(getSelectedImgId());
+}
+function downloadCanvas(elLink) {
+  const data = gCanvas.toDataURL();
+  // console.log(data);
+  elLink.href = data;
+  elLink.download = "meme.jpg";
+}
+function canvasClicked(ev) {
+  const { offsetX, offsetY } = ev;
+  const { clientX, clientY } = ev;
+  // console.log(offsetX, offsetY);
+
+  const clickedLine = gMeme.lines.find((line) => {
+    return (
+      offsetY > line.y - line.size - line.yMod && offsetY < line.y - line.yMod
+    );
+  });
+  // console.log(clickedLine);
+
+  if (clickedLine) {
+    updateSelectedLineInx(clickedLine);
+    document.querySelector(".txt-input").value =
+      gMeme.lines[gMeme.selectedLineIdx].text;
+    document.querySelector(".fill-color").value =
+      gMeme.lines[gMeme.selectedLineIdx].fillColor;
+    // openModal(clientX, clientY);
+  }
+}
+function openModal(x, y) {
+  const elModal = document.querySelector(".modal");
+  elModal.style.display = "block";
+  // elModal.innerText = `${starName}: ${starRate}`;
+
+  elModal.style.top = y + "px";
+  elModal.style.left = x + "px";
 }
