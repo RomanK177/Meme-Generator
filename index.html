@@ -5,58 +5,66 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Meme Generator</title>
     <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/edit-grid.css" />
   </head>
   <body onload="onInit()">
+     <!-- HEADER -->
     <header class="flex align-center space-between  container">
-      <h2 class="logo">Roman<span>K</span></h2>
+      <!-- <h2 class="logo">Roman<span>K</span></h2> -->
+      <img class="logo" src="ICONS/LOGO.png" alt="">
       <nav>
-        <button onclick="onGalleryClk()" class="galleryBtn">Gallery</button>
-        <!-- <button class="memeBtn">Memes</button> -->
+        <button onclick="onGalleryOpen()" class="galleryBtn">Gallery</button>
       </nav>
     </header>
 
+     <!-- GALLERY -->
     <main class="gallery container">
       <div class="gallery-images grid container">
-        <!-- <img onclick="inImgClk(this, id)" src="/img/1.jpg" alt="" /> -->
       </div>
     </main>
 
-    <main class="meme-editor flex hidden container">
-      <canvas onclick="canvasClicked(event)" id="my-canvas" width="350" height="350"></canvas>
-      <div class="modal"></div>
+      <!-- EDITOR -->
+    <main class="meme-editor flex hidden container justify-center align-center">
+        <!-- CANVAS -->
+        <div class="canvas-con">
+      <canvas onclick="canvasClicked(event)" id="my-canvas" width="450" height="450"></canvas>
+    </div>
+        <!-- MODAL - Not in use for now -->
+      <!-- <div class="modal"></div> -->
+
+          <!-- CONTROLS -->
       <div class="edit ">
-        <input class="txt-input" onchange="onTxtInput(value)" oninput="onTxtInput(value)" type="text" />
-        <!-- <div class="line-control"> -->
-            <button class="line-up" onclick="onLineUp()">&#8593</button>
-            <button class="line-down" onclick="onLineDown()">&#8595</button>
-            <button class="next-line" onclick="onNextLine()"><img src="ICONS/up-and-down-opposite-double-arrows-side-by-side.png" alt=""></button>
+        <input class="txt-input" onchange="onTxtInput(this.value)" oninput="onTxtInput(value)" type="text" />
+            <button class="line-up" onclick="onLineMove(-5)">&#8593</button>
+            <button class="line-down" onclick="onLineMove(5)">&#8595</button>
+            <!-- <button class="next-line" onclick="onNextLine()"><img src="ICONS/up-and-down-opposite-double-arrows-side-by-side.png" alt=""></button> -->
             <button class="add-line" onclick="onAddLine()"><img src="ICONS/add.png" alt=""></button>
             <button class="del-line" onclick="onDelLine()"><img src="ICONS/trash.png" alt=""></button>
-        <!-- </div> -->
-        <!-- <div class="text-editor"> -->
-            <button class="increase-txt" onclick="onIncreaseTxt()"><img src="ICONS/increase font - icon.png" alt=""></button>
-            <button class="decrease-txt" onclick="onDecreaseTxt()"><img src="ICONS/decrease font - icon.png" alt=""></button>
-            <button class="align-left" onclick="onAlignLeft()"><img src="ICONS/align-to-left.png" alt=""></button>
-            <button class="align-center" onclick="onAlignCenter()"><img src="ICONS/center-text-alignment.png" alt=""></button>
-            <button class="align-right" onclick="onAlignRight()"><img src="ICONS/align-to-right.png" alt=""></button>
+            <button class="increase-txt" onclick="onTxtChange(5)"><img src="ICONS/increase font - icon.png" alt=""></button>
+            <button class="decrease-txt" onclick="onTxtChange(-5)"><img src="ICONS/decrease font - icon.png" alt=""></button>
+            <button class="align-left" onclick="onAlignChange('left')"><img src="ICONS/align-to-left.png" alt=""></button>
+            <button class="align-txt-center" onclick="onAlignChange('center')"><img src="ICONS/center-text-alignment.png" alt=""></button>
+            <button class="align-right" onclick="onAlignChange('right')"><img src="ICONS/align-to-right.png" alt=""></button>
             <select onchange="onFontChange(value)" name="text" id="text-select">
                <option value="impact">IMPACT</option>
                <option value="Ariel">ARIEL</option>
                <option value="Georgia">GEORGIA</option>
             </select>
-            <input onchange="onStokeChange(value)" class="stroke-color" type="color">
-            <input onchange="onFillChange(value)" class="fill-color" type="color">
-        <!-- </div> -->
-        <!-- <button onclick="downloadCanvas(this)" download="">Download</button> -->
+            <label for="strokeChenge" class="stroke-color"><button><img src="ICONS/text stroke.png" alt=""></button></label>
+            <label for="fillChange" class="fill-color"><button><img src="ICONS/paint-board-and-brush.png" alt=""></button></label>
+            <input id="strokeChange" oninput="onStokeChange(value)" class="stroke-color" type="color">
+            <input id="fillChange" oninput="onFillChange(value)" class="fill-color" type="color">
         <a class="download" href="#" onclick="downloadCanvas(this)" download="">Download</a>
       </div>
     </main>
 
+
+     <!-- FOOTER -->
     <footer class="flex justify-center align-center container">
-      <h2 class="logo">Roman<span>K</span></h2>
+      <!-- <h2 class="logo">Roman<span>K</span></h2> -->
+      <img class="logo" src="ICONS/LOGO.png" alt="">
       <p>all rights reserved 2019</p>
     </footer>
-
     <script src="js/meme-service.js"></script>
     <script src="js/meme-controller.js"></script>
   </body>
